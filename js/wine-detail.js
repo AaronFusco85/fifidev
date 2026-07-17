@@ -84,7 +84,7 @@ window.WineDetail = (function () {
     // actually visible on screen — nudge Maps to re-measure first.
     google.maps.event.trigger(miniMap, 'resize');
     miniMap.setCenter({ lat: pin.lat, lng: pin.lng });
-    miniMap.setZoom(6);
+    miniMap.setZoom(5);
 
     if (miniMarker) miniMarker.setMap(null);
     miniMarker = new google.maps.Marker({
