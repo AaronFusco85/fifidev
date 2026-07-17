@@ -7,7 +7,7 @@ try {
   console.warn('[sw] Could not load config.js', err);
 }
 
-const CACHE_NAME = 'chez-fifi-cache-v3';
+const CACHE_NAME = 'chez-fifi-cache-v5';
 
 function sheetsUrlsConfigured() {
   return self.WINES_CSV_URL && !self.WINES_CSV_URL.startsWith('PASTE_')
@@ -25,6 +25,7 @@ const PRECACHE_URLS = [
   'menu.html',
   'flashcards.html',
   'maps.html',
+  'team-quiz.html',
   'data/menu.json',
   'data/flashcards.json',
   'data/regions.json',
@@ -91,13 +92,24 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Stale-while-revalidate: if a cached copy exists, return it IMMEDIATELY
+  // (this is what makes the Sheets data feel instant on repeat visits)
+  // while fetching a fresh copy in the background to update the cache for
+  // next time. Only the very first visit ever (nothing cached yet) has to
+  // wait on the network — after that, every load is fast, with content
+  // freshness lagging by about one visit, which is a fine tradeoff for a
+  // reference tool like this.
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
-        return response;
-      })
-      .catch(() => caches.match(event.request))
+    caches.match(event.request).then((cachedResponse) => {
+      const networkFetch = fetch(event.request)
+        .then((networkResponse) => {
+          const copy = networkResponse.clone();
+          caches.open(CACHE_NAME).then((cache) => cache.put(event.request, copy));
+          return networkResponse;
+        })
+        .catch(() => cachedResponse);
+
+      return cachedResponse || networkFetch;
+    })
   );
 });

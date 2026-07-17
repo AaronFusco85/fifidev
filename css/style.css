@@ -698,6 +698,191 @@ main {
   border-top: 1px solid rgba(232, 224, 201, 0.1);
 }
 
+.fun-quiz-callout {
+  text-align: center;
+  margin-top: 40px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(232, 224, 201, 0.14);
+}
+
+.fun-quiz-callout a {
+  color: var(--gold);
+  text-decoration: none;
+  font-family: var(--font-accent);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--gold);
+  padding-bottom: 2px;
+}
+
+.fun-quiz-callout a:hover { opacity: 0.8; }
+
+/* ---------- Team Quiz (fun) ---------- */
+
+.team-quiz-intro {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.team-quiz-intro p {
+  color: var(--paper-dim);
+  margin-bottom: 24px;
+  font-size: 1.05rem;
+}
+
+.start-quiz-btn {
+  font-family: var(--font-accent);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  background: var(--gold);
+  color: var(--charcoal);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.start-quiz-btn:hover { opacity: 0.85; }
+
+.team-quiz-progress {
+  font-family: var(--font-accent);
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--paper-dim);
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.team-quiz-card {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+  background: var(--charcoal-soft);
+  border: 1px solid rgba(232, 224, 201, 0.14);
+  border-radius: 6px;
+  padding: 32px 24px;
+}
+
+.team-jersey { display: flex; justify-content: center; margin-bottom: 12px; }
+
+.team-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--paper);
+}
+
+.team-meta {
+  font-family: var(--font-accent);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+
+.team-quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.team-quiz-option {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  text-align: left;
+  background: var(--charcoal);
+  border: 1px solid rgba(232, 224, 201, 0.18);
+  border-radius: 4px;
+  padding: 14px 16px;
+  cursor: pointer;
+  color: var(--paper);
+}
+
+.team-quiz-option:hover:not(:disabled) { border-color: var(--gold); }
+.team-quiz-option:disabled { cursor: default; }
+
+.team-quiz-option-name {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+}
+
+.team-quiz-option-producer {
+  font-size: 0.82rem;
+  color: var(--paper-dim);
+}
+
+.option-correct { border-color: #4f6b57; background: rgba(79, 107, 87, 0.18); }
+.option-incorrect { border-color: #7a2436; background: rgba(122, 36, 54, 0.18); }
+
+.team-quiz-feedback {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(232, 224, 201, 0.14);
+}
+
+.feedback-line {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.feedback-correct { color: #7fae8c; }
+.feedback-incorrect { color: #c97a8a; }
+
+.feedback-fact {
+  color: var(--paper-dim);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+.team-quiz-results {
+  max-width: 520px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.team-quiz-results .quiz-score {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  color: var(--paper);
+}
+
+.team-quiz-results .quiz-score-label {
+  color: var(--paper-dim);
+  margin-bottom: 28px;
+}
+
+.team-quiz-review-label {
+  font-family: var(--font-accent);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.team-quiz-review {
+  text-align: left;
+  background: var(--charcoal-soft);
+  border-radius: 4px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+}
+
+.team-quiz-review-row {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(232, 224, 201, 0.1);
+  color: var(--paper-dim);
+  font-size: 0.92rem;
+}
+
+.team-quiz-review-row:last-child { border-bottom: none; }
+.team-quiz-review-row strong { color: var(--paper); }
+
 /* ---------- Responsive ---------- */
 
 @media (max-width: 780px) {
@@ -717,6 +902,8 @@ main {
   .page-title { font-size: 1.8rem; }
   .flashcard { height: 320px; }
   .mini-map { height: 190px; }
+  .team-quiz-card { padding: 24px 16px; }
+  .team-name { font-size: 1.3rem; }
 }
 
 /* Reduced motion */
