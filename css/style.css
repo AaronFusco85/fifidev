@@ -22,6 +22,14 @@
 
 * { box-sizing: border-box; }
 
+/* Prevents the browser's double-tap-to-zoom gesture from firing when
+   someone taps a button or link quickly a few times in a row (e.g.
+   mashing "Next" on flashcards) — normal pinch-to-zoom elsewhere on the
+   page is untouched. */
+button, a {
+  touch-action: manipulation;
+}
+
 html { scroll-behavior: smooth; }
 
 body {
@@ -329,6 +337,7 @@ main {
   height: 340px;
   perspective: 1200px;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
 .flashcard-inner {
