@@ -905,6 +905,21 @@ main {
   .detail-card { padding: 24px 20px; max-height: 92vh; }
   .flashcard { height: 300px; }
   .deck-nav { flex-wrap: wrap; justify-content: center; }
+
+  /* Keep filter chips on one line and let them scroll sideways instead of
+     wrapping to a cramped second row on narrow phones. */
+  .filter-row {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+    margin: 0 -16px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .filter-row::-webkit-scrollbar { display: none; }
+  .filter-chip { flex-shrink: 0; }
 }
 
 @media (max-width: 420px) {
