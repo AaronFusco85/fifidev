@@ -236,31 +236,6 @@ main {
 .tag-sparkling { background: #3d5a68; }
 .tag-dessert   { background: #7a4a1f; }
 
-.quiz-banner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: var(--charcoal-soft);
-  border: 1px solid var(--gold);
-  color: var(--paper);
-  padding: 14px 20px;
-  border-radius: 4px;
-  margin-bottom: 24px;
-  font-size: 0.92rem;
-}
-
-.quiz-banner a {
-  color: var(--gold);
-  text-decoration: none;
-  font-family: var(--font-accent);
-  font-size: 0.8rem;
-  letter-spacing: 0.05em;
-  white-space: nowrap;
-  margin-left: 20px;
-}
-
-.quiz-banner a:hover { text-decoration: underline; }
-
 .filter-block {
   margin-bottom: 18px;
 }
@@ -735,8 +710,6 @@ main {
   .detail-meta { grid-template-columns: 1fr; }
   .detail-card { padding: 24px 20px; max-height: 92vh; }
   .flashcard { height: 300px; }
-  .quiz-banner { flex-direction: column; align-items: flex-start; gap: 8px; }
-  .quiz-banner a { margin-left: 0; }
   .deck-nav { flex-wrap: wrap; justify-content: center; }
 }
 

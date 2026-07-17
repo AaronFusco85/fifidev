@@ -9,8 +9,6 @@
   const typeFilterRow = document.getElementById('typeFilterRow');
   const difficultyFilterRow = document.getElementById('difficultyFilterRow');
   const toggleOrderBtn = document.getElementById('toggleOrderBtn');
-  const quizBanner = document.getElementById('quizBanner');
-  const quizBannerText = document.getElementById('quizBannerText');
 
   let deck = [];
   let filtered = [];
@@ -188,9 +186,6 @@
       filtered = shuffle(deck.filter(c => c.wineId === quizWineId));
       nextAction = 'difficulty';
       toggleOrderBtn.textContent = 'Order';
-      const wineName = filtered.length ? filtered[0].wine : 'this wine';
-      quizBannerText.textContent = `Quiz: ${wineName}`;
-      quizBanner.hidden = false;
       document.querySelectorAll('.filter-block').forEach(el => el.style.display = 'none');
     } else {
       buildTypeFilters();
