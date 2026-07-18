@@ -7,7 +7,7 @@
   let roundIndex = 0;
   let score = 0;
   let missed = [];
-  let answered = false;
+  let roundMissedOnce = false;
 
   function shuffle(arr) {
     const a = arr.slice();
@@ -23,7 +23,7 @@
   function jerseySvg(colors) {
     const [c1, c2] = colors;
     return `
-      <svg viewBox="0 0 160 160" width="120" height="120" role="img" aria-label="Team jersey">
+      <svg viewBox="0 0 160 160" width="90" height="90" role="img" aria-label="Team jersey">
         <defs>
           <clipPath id="jerseyClip">
             <path d="M 55 20 L 40 40 L 20 55 L 35 80 L 45 70 L 45 140 L 115 140 L 115 70 L 125 80 L 140 55 L 120 40 L 105 20 C 100 30 90 35 80 35 C 70 35 60 30 55 20 Z"/>
@@ -64,10 +64,6 @@
     }).filter(Boolean);
   }
 
-  function scrollToQuizTop() {
-    root.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
   function renderIntro() {
     root.innerHTML = `
       <div class="team-quiz-intro">
@@ -80,77 +76,94 @@
       score = 0;
       missed = [];
       renderRound();
-      scrollToQuizTop();
     });
   }
 
+  function optionsMarkup(options) {
+    return options.map(w => `
+      <button class="team-quiz-option" data-id="${w.id}">
+        <span class="tag tag-${w.category}">${categoryLabel(w.category)}</span>
+        <span class="team-quiz-option-producer">${w.producer}</span>
+        <span class="team-quiz-option-name">${w.name}</span>
+      </button>
+    `).join('');
+  }
+
   function renderRound() {
-    answered = false;
+    roundMissedOnce = false;
     const round = rounds[roundIndex];
     const { pairing, correctWine, options } = round;
 
     root.innerHTML = `
       <div class="team-quiz-progress">Round ${roundIndex + 1} of ${rounds.length} · Score: ${score}</div>
-      <div class="team-quiz-card">
-        <div class="team-jersey">${jerseySvg(pairing.colors)}</div>
-        <div class="team-name">${pairing.team}</div>
-        <div class="team-meta">${pairing.city} · ${pairing.league}</div>
-        <div class="team-quiz-options" id="teamQuizOptions">
-          ${options.map(w => `
-            <button class="team-quiz-option" data-id="${w.id}">
-              <span class="tag tag-${w.category}">${categoryLabel(w.category)}</span>
-              <span class="team-quiz-option-producer">${w.producer}</span>
-              <span class="team-quiz-option-name">${w.name}</span>
-            </button>
-          `).join('')}
+      <div class="team-quiz-flip" id="teamQuizFlip">
+        <div class="team-quiz-flip-inner">
+          <div class="team-quiz-face team-quiz-face-front">
+            <div class="team-jersey">${jerseySvg(pairing.colors)}</div>
+            <div class="team-name">${pairing.team}</div>
+            <div class="team-meta">${pairing.city} · ${pairing.league}</div>
+            <div class="team-quiz-options" id="teamQuizOptions">
+              ${optionsMarkup(options)}
+            </div>
+          </div>
+          <div class="team-quiz-face team-quiz-face-back" id="teamQuizBack"></div>
         </div>
-        <div class="team-quiz-feedback" id="teamQuizFeedback" hidden></div>
       </div>
     `;
 
+    wireOptions(round);
+  }
+
+  function wireOptions(round) {
+    const { pairing, correctWine } = round;
+
     document.querySelectorAll('.team-quiz-option').forEach(btn => {
       btn.addEventListener('click', () => {
-        if (answered) return;
-        answered = true;
         const chosenId = btn.dataset.id;
         const correct = chosenId === correctWine.id;
 
-        document.querySelectorAll('.team-quiz-option').forEach(b => {
-          b.disabled = true;
-          if (b.dataset.id === correctWine.id) b.classList.add('option-correct');
-          else if (b.dataset.id === chosenId) b.classList.add('option-incorrect');
-        });
-
         if (correct) {
-          score += 1;
-        } else {
+          if (!roundMissedOnce) score += 1;
+        } else if (!roundMissedOnce) {
+          roundMissedOnce = true;
           missed.push({ pairing, correctWine });
         }
 
-        const feedback = document.getElementById('teamQuizFeedback');
-        feedback.hidden = false;
-        feedback.innerHTML = `
-          <div class="feedback-line ${correct ? 'feedback-correct' : 'feedback-incorrect'}">
-            ${correct ? 'Got it!' : `Not quite — it's ${correctWine.name}.`}
-          </div>
-          <div class="feedback-fact">${pairing.funFact}</div>
-          <button id="teamQuizNextBtn" class="start-quiz-btn">
-            ${roundIndex + 1 < rounds.length ? 'Next →' : 'See Results →'}
-          </button>
-        `;
-        // Bring the result + Next button into view immediately — don't
-        // make the person scroll down to see if they got it right.
-        feedback.scrollIntoView({ behavior: 'smooth', block: 'end' });
-        document.getElementById('teamQuizNextBtn').addEventListener('click', () => {
-          roundIndex += 1;
-          if (roundIndex < rounds.length) {
-            renderRound();
-          } else {
-            renderResults();
-          }
-          scrollToQuizTop();
-        });
+        showResult(round, correct);
       });
+    });
+  }
+
+  function showResult(round, correct) {
+    const { pairing, correctWine } = round;
+    const isLastRound = roundIndex + 1 >= rounds.length;
+    const back = document.getElementById('teamQuizBack');
+
+    back.innerHTML = `
+      <div class="feedback-line ${correct ? 'feedback-correct' : 'feedback-incorrect'}">
+        ${correct ? "You're right!" : `Not quite — it's ${correctWine.name}.`}
+      </div>
+      <div class="feedback-fact">${pairing.funFact}</div>
+      <button id="teamQuizContinueBtn" class="start-quiz-btn">
+        ${correct ? (isLastRound ? 'See Results →' : 'Next Question →') : 'Try Again →'}
+      </button>
+    `;
+
+    document.getElementById('teamQuizFlip').classList.add('flipped');
+
+    document.getElementById('teamQuizContinueBtn').addEventListener('click', () => {
+      if (correct) {
+        roundIndex += 1;
+        if (roundIndex < rounds.length) {
+          renderRound();
+        } else {
+          renderResults();
+        }
+      } else {
+        // Flip back to the same question so they can pick again — no new
+        // round, no page reflow, no scrolling.
+        document.getElementById('teamQuizFlip').classList.remove('flipped');
+      }
     });
   }
 
@@ -175,7 +188,6 @@
     document.getElementById('teamQuizAgainBtn').addEventListener('click', () => {
       rounds = buildRounds();
       renderIntro();
-      scrollToQuizTop();
     });
   }
 
