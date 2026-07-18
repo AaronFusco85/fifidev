@@ -926,8 +926,14 @@ main {
   .page-title { font-size: 1.8rem; }
   .flashcard { height: 320px; }
   .mini-map { height: 190px; }
-  .team-quiz-card { padding: 24px 16px; }
-  .team-name { font-size: 1.3rem; }
+  .team-quiz-card { padding: 20px 14px; }
+  .team-jersey svg { width: 90px; height: 90px; }
+  .team-name { font-size: 1.2rem; }
+  .team-meta { margin-bottom: 16px; }
+  .team-quiz-option { padding: 10px 14px; }
+  .team-quiz-feedback { margin-top: 14px; padding-top: 14px; }
+  .feedback-line { font-size: 1.05rem; }
+  .feedback-fact { margin-bottom: 14px; }
 }
 
 /* Reduced motion */

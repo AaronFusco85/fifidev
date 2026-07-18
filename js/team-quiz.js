@@ -54,11 +54,15 @@
       if (!correctWine) return null;
 
       const others = wines.filter(w => w.id !== pairing.wineId);
-      const distractors = shuffle(others).slice(0, 3);
+      const distractors = shuffle(others).slice(0, 2);
       const options = shuffle([correctWine, ...distractors]);
 
       return { pairing, correctWine, options };
     }).filter(Boolean);
+  }
+
+  function scrollToQuizTop() {
+    root.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function renderIntro() {
@@ -73,6 +77,7 @@
       score = 0;
       missed = [];
       renderRound();
+      scrollToQuizTop();
     });
   }
 
@@ -130,6 +135,9 @@
             ${roundIndex + 1 < rounds.length ? 'Next →' : 'See Results →'}
           </button>
         `;
+        // Bring the result + Next button into view immediately — don't
+        // make the person scroll down to see if they got it right.
+        feedback.scrollIntoView({ behavior: 'smooth', block: 'end' });
         document.getElementById('teamQuizNextBtn').addEventListener('click', () => {
           roundIndex += 1;
           if (roundIndex < rounds.length) {
@@ -137,6 +145,7 @@
           } else {
             renderResults();
           }
+          scrollToQuizTop();
         });
       });
     });
@@ -163,6 +172,7 @@
     document.getElementById('teamQuizAgainBtn').addEventListener('click', () => {
       rounds = buildRounds();
       renderIntro();
+      scrollToQuizTop();
     });
   }
 

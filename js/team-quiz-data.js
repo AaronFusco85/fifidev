@@ -4,10 +4,12 @@
 // club's actual crest/logo artwork, to stay clear of trademark issues while
 // still being instantly recognizable.
 //
-// Trimmed to the 9 most globally recognizable clubs. That means a few wines
-// (Muscadet, Albariño, Chenin Blanc, Chablis) don't appear — their natural
-// regional clubs (Nantes, Celta Vigo, Tours, Auxerre) aren't famous enough
-// to make this cut. Dessert wines are excluded throughout.
+// Every pairing here is a real, non-obscure club AND genuinely close to the
+// wine's region — no "biggest name in the whole country" leaps (like Paris
+// Saint-Germain for Sancerre, which had zero real connection). A couple of
+// wines (Sancerre, Chenin Blanc) don't appear because there's no club that's
+// both recognizable and actually nearby — better to leave them out than
+// force a leap. Dessert wines are excluded throughout.
 //
 // To change a pairing: edit any entry below. wineId must match an id in
 // the Wines sheet/tab.
@@ -54,12 +56,28 @@ window.TEAM_QUIZ_PAIRINGS = [
     funFact: "Laurent-Perrier is based in Tours-sur-Marne, right in Champagne's Montagne de Reims — Stade de Reims's home turf."
   },
   {
-    team: "Paris Saint-Germain",
+    team: "FC Nantes",
     league: "Ligue 1, France",
-    city: "Paris",
-    colors: ["#004170", "#da291c"],
-    wineId: "m-07",
-    funFact: "A loose one — Sancerre doesn't have a big club of its own, so we gave it France's most famous name instead."
+    city: "Nantes",
+    colors: ["#fae100", "#00843d"],
+    wineId: "m-06",
+    funFact: "Muscadet is grown right around Nantes — Luneau-Papin's vines are practically in FC Nantes's backyard."
+  },
+  {
+    team: "Celta Vigo",
+    league: "La Liga, Spain",
+    city: "Vigo",
+    colors: ["#8ac6e8", "#ffffff"],
+    wineId: "m-08",
+    funFact: "Vigo sits right in Rías Baixas, Albariño's home turf in Galicia."
+  },
+  {
+    team: "AJ Auxerre",
+    league: "Ligue 1, France",
+    city: "Auxerre",
+    colors: ["#ffffff", "#0033a0"],
+    wineId: "m-10",
+    funFact: "Chablis is a short drive from Auxerre — same corner of Burgundy, same Kimmeridgian soil."
   },
   {
     team: "Athletic Bilbao",
@@ -75,7 +93,7 @@ window.TEAM_QUIZ_PAIRINGS = [
     city: "Marseille",
     colors: ["#ffffff", "#5fa8d3"],
     wineId: "m-12",
-    funFact: "A loose one — Marseille is the biggest name in the south of France, even if the Rhône vineyards are a bit inland."
+    funFact: "Marseille is the biggest city in the south of France, not far from the Rhône vineyards around Avignon."
   },
   {
     team: "Real Madrid",
@@ -83,15 +101,15 @@ window.TEAM_QUIZ_PAIRINGS = [
     city: "Madrid",
     colors: ["#ffffff", "#febe10"],
     wineId: "m-13",
-    funFact: "A loose one — Méntrida is closer to Madrid than any other big wine region on our list, so we paired it with the biggest name in Spanish football."
+    funFact: "Méntrida sits right in the Madrid region, in the Sierra de Gredos foothills."
   },
   {
-    team: "Olympique Lyonnais",
-    league: "Ligue 1, France",
-    city: "Lyon",
-    colors: ["#ffffff", "#0b3d91"],
+    team: "Dijon FCO",
+    league: "Ligue 2, France",
+    city: "Dijon",
+    colors: ["#ffffff", "#c8102e"],
     wineId: "m-14",
-    funFact: "A loose one — Lyon is the nearest major football city to Burgundy's Côte de Nuits."
+    funFact: "Dijon sits right at the northern tip of the Côte de Nuits — about as close as it gets."
   },
   {
     team: "Olympique de Marseille",
@@ -99,7 +117,7 @@ window.TEAM_QUIZ_PAIRINGS = [
     city: "Marseille",
     colors: ["#ffffff", "#5fa8d3"],
     wineId: "m-15",
-    funFact: "Same pairing as the Chêne Bleu rosé — both from the southern Rhône."
+    funFact: "Same pairing as the Chêne Bleu rosé — both from the southern Rhône, near Avignon."
   },
   {
     team: "Girondins de Bordeaux",
@@ -110,11 +128,11 @@ window.TEAM_QUIZ_PAIRINGS = [
     funFact: "Vieux Château Champs de Mars is right in Bordeaux's backyard, in Castillon."
   },
   {
-    team: "Atlético Madrid",
+    team: "Real Valladolid",
     league: "La Liga, Spain",
-    city: "Madrid",
-    colors: ["#c8102e", "#ffffff"],
+    city: "Valladolid",
+    colors: ["#5b2d90", "#ffffff"],
     wineId: "m-17",
-    funFact: "A loose one — Ribera del Duero is north of Madrid, so we paired it with one of Spain's biggest clubs rather than the smaller local side."
+    funFact: "Valladolid is often called the unofficial capital of Ribera del Duero, Tempranillo's home region."
   }
 ];
