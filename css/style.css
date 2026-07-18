@@ -817,6 +817,22 @@ main {
   transform: rotateY(180deg);
 }
 
+/* Used for one instant, before paint, to measure the front face's actual
+   natural content height (which varies with wine/team name length) so the
+   card can be sized to fit exactly — instead of guessing a fixed pixel
+   height that inevitably cuts off content on some screens. */
+.team-quiz-flip-inner.measuring {
+  height: auto;
+}
+
+.team-quiz-flip-inner.measuring .team-quiz-face-front {
+  position: static;
+}
+
+.team-quiz-flip-inner.measuring .team-quiz-face-back {
+  display: none;
+}
+
 .team-quiz-face {
   position: absolute;
   inset: 0;
@@ -989,7 +1005,6 @@ main {
   .page-title { font-size: 1.8rem; }
   .flashcard { height: 320px; }
   .mini-map { height: 190px; }
-  .team-quiz-flip-inner { height: 460px; }
   .team-quiz-face { padding: 20px 14px; }
   .team-name { font-size: 1.2rem; }
   .team-meta { margin-bottom: 16px; }

@@ -116,8 +116,8 @@
     root.innerHTML = `
       <div class="team-quiz-progress">Round ${roundIndex + 1} of ${rounds.length} · Score: ${score}</div>
       <div class="team-quiz-flip" id="teamQuizFlip">
-        <div class="team-quiz-flip-inner">
-          <div class="team-quiz-face team-quiz-face-front">
+        <div class="team-quiz-flip-inner" id="teamQuizFlipInner">
+          <div class="team-quiz-face team-quiz-face-front" id="teamQuizFront">
             <div class="team-jersey">${jerseySvg(pairing.colors)}</div>
             <div class="team-name">${pairing.team}</div>
             <div class="team-meta">${pairing.city} · ${pairing.league}</div>
@@ -130,8 +130,22 @@
       </div>
     `;
 
+    sizeCardToContent();
     wireOptions(round);
     scrollToQuizTop();
+  }
+
+  // Measures the front face's real content height (which varies with wine
+  // and team name length) and sizes the flip card to fit it exactly —
+  // instead of guessing a fixed pixel height that cuts off content on some
+  // screens and leaves empty space on others.
+  function sizeCardToContent() {
+    const flipInner = document.getElementById('teamQuizFlipInner');
+    const front = document.getElementById('teamQuizFront');
+    flipInner.classList.add('measuring');
+    const naturalHeight = front.offsetHeight;
+    flipInner.classList.remove('measuring');
+    flipInner.style.height = (naturalHeight + 4) + 'px';
   }
 
   function wireOptions(round) {
