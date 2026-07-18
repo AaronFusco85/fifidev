@@ -116,8 +116,8 @@ window.WineDetail = (function () {
   function open(item) {
     document.getElementById('detailTag').textContent = categoryLabel(item.category);
     document.getElementById('detailTag').className = 'tag tag-' + item.category;
-    document.getElementById('detailName').textContent = item.name;
-    document.getElementById('detailProducer').textContent = `${item.producer} · ${item.vintage}`;
+    document.getElementById('detailProducer').textContent = item.producer;
+    document.getElementById('detailName').innerHTML = `${item.name}<span class="vintage">, ${item.vintage}</span>`;
     document.getElementById('detailGrape').textContent = item.grape;
     document.getElementById('detailRegion').textContent = item.region;
     document.getElementById('detailGlass').textContent = item.priceGlass;

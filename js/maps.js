@@ -21,8 +21,8 @@
     const rows = wines.map(w => `
       <div class="pin-wine-row" data-id="${w.id}">
         <span class="tag tag-${w.category}">${categoryLabel(w.category)}</span>
-        <div class="pin-wine-name">${w.name}</div>
-        <div class="pin-wine-meta">${w.producer} · ${w.vintage} · ${w.priceGlass}</div>
+        <div class="pin-wine-name">${w.producer}</div>
+        <div class="pin-wine-meta">${w.name}, ${w.vintage} · ${w.priceGlass}</div>
       </div>
     `).join('');
 

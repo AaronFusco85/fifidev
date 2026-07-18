@@ -20,8 +20,9 @@
       btn.className = 'menu-item';
       btn.innerHTML = `
         <span class="tag tag-${item.category}">${categoryLabel(item.category)}</span>
-        <h3>${item.name}</h3>
-        <div class="producer">${item.producer} · ${item.vintage}</div>
+        <div class="wine-producer">${item.producer}</div>
+        <div class="wine-cuvee">${item.name}<span class="vintage">, ${item.vintage}</span></div>
+        <div class="wine-region">${item.region}</div>
         <div class="prices">${priceLine}</div>
       `;
       btn.addEventListener('click', () => window.WineDetail.open(item));
