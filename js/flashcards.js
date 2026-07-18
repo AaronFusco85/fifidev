@@ -181,11 +181,12 @@
     const quizWineId = params.get('wineId');
 
     if (quizWineId) {
-      // "Quiz Me" mode: just the 4 questions for one wine, shuffled by
-      // default, with the toggle available to switch to difficulty order.
-      filtered = shuffle(deck.filter(c => c.wineId === quizWineId));
-      nextAction = 'difficulty';
-      toggleOrderBtn.textContent = 'Order';
+      // "Quiz Me" mode: just the 4 questions for one wine, in order
+      // (Easy → Medium → Medium → Hard), with the toggle available to
+      // switch to shuffled order if wanted.
+      filtered = byDifficulty(deck.filter(c => c.wineId === quizWineId));
+      nextAction = 'shuffle';
+      toggleOrderBtn.textContent = 'Randomize';
       document.querySelectorAll('.filter-block').forEach(el => el.style.display = 'none');
     } else {
       buildTypeFilters();
