@@ -847,13 +847,16 @@ main {
 .team-quiz-option:hover:not(:disabled) { border-color: var(--gold); }
 .team-quiz-option:disabled { cursor: default; }
 
-.team-quiz-option-name {
+.team-quiz-option-producer {
   font-family: var(--font-display);
+  font-weight: 600;
   font-size: 1.05rem;
 }
 
-.team-quiz-option-producer {
-  font-size: 0.82rem;
+.team-quiz-option-name {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 0.88rem;
   color: var(--paper-dim);
 }
 

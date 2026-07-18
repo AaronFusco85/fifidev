@@ -99,8 +99,8 @@
           ${options.map(w => `
             <button class="team-quiz-option" data-id="${w.id}">
               <span class="tag tag-${w.category}">${categoryLabel(w.category)}</span>
-              <span class="team-quiz-option-name">${w.name}</span>
               <span class="team-quiz-option-producer">${w.producer}</span>
+              <span class="team-quiz-option-name">${w.name}</span>
             </button>
           `).join('')}
         </div>
