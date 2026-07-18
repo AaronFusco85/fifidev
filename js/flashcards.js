@@ -195,7 +195,12 @@
     }
 
     index = 0;
-    renderCard();
+    // Deferring to the next frame avoids a WebKit quirk where content set
+    // inside the 3D-transformed flip card BEFORE the browser's first paint
+    // can render stale or overlapping (missing badges, garbled text) until
+    // something else forces a repaint. Every render after this one is fine
+    // because by then the browser has already painted the card once.
+    requestAnimationFrame(() => renderCard());
   } catch (err) {
     cardQuestion.textContent = 'Could not load the flashcard deck.';
     console.error(err);
