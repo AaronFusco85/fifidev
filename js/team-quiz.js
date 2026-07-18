@@ -53,7 +53,10 @@
       const correctWine = winesById[pairing.wineId];
       if (!correctWine) return null;
 
-      const others = wines.filter(w => w.id !== pairing.wineId);
+      // Dessert wines are excluded from this quiz entirely — as wrong
+      // answers too, not just correct ones, so a Champagne round doesn't
+      // suddenly offer a Sauternes as an option.
+      const others = wines.filter(w => w.id !== pairing.wineId && w.category !== 'dessert');
       const distractors = shuffle(others).slice(0, 2);
       const options = shuffle([correctWine, ...distractors]);
 
