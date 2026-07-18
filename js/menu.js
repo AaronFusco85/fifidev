@@ -21,7 +21,7 @@
       btn.innerHTML = `
         <span class="tag tag-${item.category}">${categoryLabel(item.category)}</span>
         <div class="wine-producer">${item.producer}</div>
-        <div class="wine-cuvee">${item.name}<span class="vintage">, ${item.vintage}</span></div>
+        <div class="wine-cuvee">${item.name} · ${item.vintage}</div>
         <div class="wine-region">${item.region}</div>
         <div class="prices">${priceLine}</div>
       `;
