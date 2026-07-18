@@ -64,6 +64,24 @@
     }).filter(Boolean);
   }
 
+  function hideIntroCopy() {
+    ['quizEyebrow', 'quizTitle', 'quizLede'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+  }
+
+  function showIntroCopy() {
+    ['quizEyebrow', 'quizTitle', 'quizLede'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = '';
+    });
+  }
+
+  function scrollToQuizTop() {
+    root.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   function renderIntro() {
     root.innerHTML = `
       <div class="team-quiz-intro">
@@ -75,6 +93,7 @@
       roundIndex = 0;
       score = 0;
       missed = [];
+      hideIntroCopy();
       renderRound();
     });
   }
@@ -112,6 +131,7 @@
     `;
 
     wireOptions(round);
+    scrollToQuizTop();
   }
 
   function wireOptions(round) {
@@ -135,18 +155,19 @@
   }
 
   function showResult(round, correct) {
-    const { pairing, correctWine } = round;
+    const { pairing } = round;
     const isLastRound = roundIndex + 1 >= rounds.length;
     const back = document.getElementById('teamQuizBack');
 
-    back.innerHTML = `
-      <div class="feedback-line ${correct ? 'feedback-correct' : 'feedback-incorrect'}">
-        ${correct ? "You're right!" : `Not quite — it's ${correctWine.name}.`}
-      </div>
+    back.innerHTML = correct ? `
+      <div class="feedback-line feedback-correct">You're right!</div>
       <div class="feedback-fact">${pairing.funFact}</div>
       <button id="teamQuizContinueBtn" class="start-quiz-btn">
-        ${correct ? (isLastRound ? 'See Results →' : 'Next Question →') : 'Try Again →'}
+        ${isLastRound ? 'See Results →' : 'Next Question →'}
       </button>
+    ` : `
+      <div class="feedback-line feedback-incorrect">Not quite — give it another guess.</div>
+      <button id="teamQuizContinueBtn" class="start-quiz-btn">Try Again →</button>
     `;
 
     document.getElementById('teamQuizFlip').classList.add('flipped');
@@ -157,6 +178,7 @@
         if (roundIndex < rounds.length) {
           renderRound();
         } else {
+          showIntroCopy();
           renderResults();
         }
       } else {
