@@ -114,6 +114,14 @@ window.WineDetail = (function () {
   }
 
   function open(item) {
+    const photo = document.getElementById('detailPhoto');
+    if (item.imageUrl) {
+      photo.src = item.imageUrl;
+      photo.style.display = '';
+    } else {
+      photo.style.display = 'none';
+    }
+
     document.getElementById('detailTag').textContent = categoryLabel(item.category);
     document.getElementById('detailTag').className = 'tag tag-' + item.category;
     document.getElementById('detailProducer').textContent = item.producer;

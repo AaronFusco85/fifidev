@@ -457,15 +457,41 @@ main {
   background: var(--charcoal-soft);
   border: 1px solid rgba(232, 224, 201, 0.14);
   border-radius: 4px;
-  padding: 22px;
+  padding: 18px;
   cursor: pointer;
   transition: border-color 0.2s, transform 0.2s;
   text-align: left;
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
 }
 
 .menu-item:hover {
   border-color: var(--gold);
   transform: translateY(-2px);
+}
+
+.menu-item-photo {
+  width: 64px;
+  height: 128px;
+  object-fit: contain;
+  object-position: center;
+  flex-shrink: 0;
+  background: rgba(236, 225, 204, 0.04);
+  border-radius: 2px;
+}
+
+.menu-item.no-photo {
+  padding: 22px;
+}
+
+.menu-item.no-photo .menu-item-photo {
+  display: none;
+}
+
+.menu-item-body {
+  flex: 1;
+  min-width: 0;
 }
 
 .menu-item .wine-producer {
@@ -539,6 +565,27 @@ main {
   cursor: pointer;
   color: var(--ink-soft);
   line-height: 1;
+}
+
+.detail-header {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+}
+
+.detail-photo {
+  width: 80px;
+  height: 160px;
+  object-fit: contain;
+  object-position: center top;
+  flex-shrink: 0;
+  background: rgba(36, 31, 26, 0.04);
+  border-radius: 2px;
+}
+
+.detail-header-text {
+  flex: 1;
+  min-width: 0;
 }
 
 .detail-card .detail-producer {

@@ -67,6 +67,7 @@ you wouldn't want a guest to stumble onto if the link ever got out.
 | `tastingNotes`, `wineryProfile`, `farmingWinemaking`, `aboutCuvee`, `vintageDetails` | The five sections shown when a server clicks into the wine |
 | `lat`, `lng` | The wine region's coordinates (right-click the spot on Google Maps to copy them) |
 | `pinLabel` | The map pin's name, e.g. `Sauternes, Bordeaux`. **To share a pin with another wine** (like the two Sauternes bottles do), copy that wine's `pinLabel`, `lat`, and `lng` *exactly* — matching label is what groups wines onto the same pin. |
+| `imageUrl` | A direct link to a bottle photo (right-click an image online → "Copy Image Address" — needs to end in something like `.jpg` or `.png`, not a link to the webpage it's on). Leave blank and the card just shows without a photo, no broken-image icon. |
 
 ### Flashcards tab
 
@@ -80,6 +81,19 @@ Each wine needs **exactly 4 rows** (one per difficulty).
 | `wine` | The wine's display name, shown on the flashcard front |
 | `question`, `answer` | The card content |
 | `q` | `1` = Easy, `2` or `3` = Medium, `4` = Hard |
+
+### A note on bottle photos
+
+Since `imageUrl` just links to an image hosted somewhere else, two things
+are worth knowing:
+
+- **Some sites block "hotlinking"** (showing their image on someone else's
+  page) — if a photo doesn't show up, that's the most likely reason. A
+  producer's own site or a retailer that doesn't block this usually works
+  fine; if one link doesn't work, try another source for that bottle.
+- **They're cached for offline use automatically**, same as everything
+  else on the site — once a photo has loaded for someone, it'll keep
+  showing up for them even without a connection.
 
 ## Workflows
 

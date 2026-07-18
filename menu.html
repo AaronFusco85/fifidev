@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://maps.googleapis.com">
 <link rel="preconnect" href="https://docs.google.com">
 <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-<link rel="stylesheet" href="css/style.css?v=30">
+<link rel="stylesheet" href="css/style.css?v=31">
 </head>
 <body>
 
@@ -51,10 +51,15 @@
 <div class="detail-overlay" id="detailOverlay" hidden>
   <div class="detail-card">
     <button class="detail-close" id="detailClose" aria-label="Close">×</button>
-    <span class="tag" id="detailTag"></span>
-    <div class="detail-producer" id="detailProducer"></div>
-    <h2 id="detailName"></h2>
-    <a class="quiz-me-link" id="detailQuizLink" href="#">Quiz me on this wine →</a>
+    <div class="detail-header">
+      <img class="detail-photo" id="detailPhoto" src="" alt="" onerror="this.style.display='none'">
+      <div class="detail-header-text">
+        <span class="tag" id="detailTag"></span>
+        <div class="detail-producer" id="detailProducer"></div>
+        <h2 id="detailName"></h2>
+        <a class="quiz-me-link" id="detailQuizLink" href="#">Quiz me on this wine →</a>
+      </div>
+    </div>
     <div class="detail-meta">
       <div><span class="meta-label">Grape</span><span id="detailGrape"></span></div>
       <div><span class="meta-label">Region</span><span id="detailRegion"></span></div>
@@ -94,9 +99,9 @@
 
 <script src="js/config.js?v=18"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.5.4/papaparse.min.js"></script>
-<script src="js/data-source.js?v=18"></script>
-<script src="js/wine-detail.js?v=20"></script>
-<script src="js/menu.js?v=16"></script>
+<script src="js/data-source.js?v=19"></script>
+<script src="js/wine-detail.js?v=21"></script>
+<script src="js/menu.js?v=17"></script>
 <script src="js/sw-register.js"></script>
 </body>
 </html>

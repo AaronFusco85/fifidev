@@ -18,12 +18,19 @@
         : item.priceGlass;
       const btn = document.createElement('button');
       btn.className = 'menu-item';
+      const imageMarkup = item.imageUrl
+        ? `<img class="menu-item-photo" src="${item.imageUrl}" alt="" loading="lazy" onerror="this.closest('.menu-item').classList.add('no-photo')">`
+        : '';
+      if (!item.imageUrl) btn.classList.add('no-photo');
       btn.innerHTML = `
-        <span class="tag tag-${item.category}">${categoryLabel(item.category)}</span>
-        <div class="wine-producer">${item.producer}</div>
-        <div class="wine-cuvee">${item.name} · ${item.vintage}</div>
-        <div class="wine-region">${item.region}</div>
-        <div class="prices">${priceLine}</div>
+        ${imageMarkup}
+        <div class="menu-item-body">
+          <span class="tag tag-${item.category}">${categoryLabel(item.category)}</span>
+          <div class="wine-producer">${item.producer}</div>
+          <div class="wine-cuvee">${item.name} · ${item.vintage}</div>
+          <div class="wine-region">${item.region}</div>
+          <div class="prices">${priceLine}</div>
+        </div>
       `;
       btn.addEventListener('click', () => window.WineDetail.open(item));
       grid.appendChild(btn);

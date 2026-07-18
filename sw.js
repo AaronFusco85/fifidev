@@ -7,7 +7,7 @@ try {
   console.warn('[sw] Could not load config.js', err);
 }
 
-const CACHE_NAME = 'chez-fifi-cache-v6';
+const CACHE_NAME = 'chez-fifi-cache-v7';
 
 function sheetsUrlsConfigured() {
   return self.WINES_CSV_URL && !self.WINES_CSV_URL.startsWith('PASTE_')
@@ -82,13 +82,17 @@ self.addEventListener('fetch', (event) => {
   const url = new URL(event.request.url);
   const isSheetsRequest = sheetsUrlsConfigured()
     && (event.request.url === self.WINES_CSV_URL || event.request.url === self.FLASHCARDS_CSV_URL);
+  // Bottle photo links can point anywhere (producer sites, retailers,
+  // etc.) — cache image requests opportunistically regardless of domain,
+  // same idea as the Sheets data, so photos you've already viewed once
+  // keep showing up offline.
+  const isImageRequest = event.request.destination === 'image';
 
-  // Same-origin GETs, plus the two specific Sheets CSV endpoints (so the
-  // wine list and flashcards keep working offline even after moving to
-  // Sheets). Everything else cross-origin — Google Maps tiles/scripts,
-  // Google Fonts, etc. — passes through untouched; those can't
-  // meaningfully work offline anyway.
-  if (event.request.method !== 'GET' || (url.origin !== self.location.origin && !isSheetsRequest)) {
+  // Same-origin GETs, the two specific Sheets CSV endpoints, and image
+  // requests from any origin. Everything else cross-origin — Google Maps
+  // tiles/scripts, Google Fonts, etc. — passes through untouched; those
+  // can't meaningfully work offline anyway.
+  if (event.request.method !== 'GET' || (url.origin !== self.location.origin && !isSheetsRequest && !isImageRequest)) {
     return;
   }
 

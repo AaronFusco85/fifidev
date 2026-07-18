@@ -36,7 +36,8 @@ window.DataSource = (function () {
       vintageDetails: (row.vintageDetails || '').trim(),
       lat: parseFloat(row.lat),
       lng: parseFloat(row.lng),
-      pinLabel: (row.pinLabel || '').trim()
+      pinLabel: (row.pinLabel || '').trim(),
+      imageUrl: (row.imageUrl || '').trim()
     };
   }
 
