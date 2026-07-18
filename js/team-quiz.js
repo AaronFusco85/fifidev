@@ -56,7 +56,16 @@
       // Dessert wines are excluded from this quiz entirely — as wrong
       // answers too, not just correct ones, so a Champagne round doesn't
       // suddenly offer a Sauternes as an option.
-      const others = wines.filter(w => w.id !== pairing.wineId && w.category !== 'dessert');
+      // Dessert wines are excluded entirely (as wrong answers too), and so
+      // is anything sharing the correct wine's category — otherwise a round
+      // like Stade de Reims (which covers 4 different Champagnes) could
+      // offer up another Champagne as a "wrong" answer, which is genuinely
+      // ambiguous since it's also a correct match for that team.
+      const others = wines.filter(w =>
+        w.id !== pairing.wineId &&
+        w.category !== 'dessert' &&
+        w.category !== correctWine.category
+      );
       const distractors = shuffle(others).slice(0, 2);
       const options = shuffle([correctWine, ...distractors]);
 
