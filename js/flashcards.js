@@ -9,6 +9,7 @@
   const typeFilterRow = document.getElementById('typeFilterRow');
   const difficultyFilterRow = document.getElementById('difficultyFilterRow');
   const toggleOrderBtn = document.getElementById('toggleOrderBtn');
+  const cardStage = document.querySelector('.card-stage');
 
   let deck = [];
   let filtered = [];
@@ -200,7 +201,13 @@
     // can render stale or overlapping (missing badges, garbled text) until
     // something else forces a repaint. Every render after this one is fine
     // because by then the browser has already painted the card once.
-    requestAnimationFrame(() => renderCard());
+    requestAnimationFrame(() => {
+      renderCard();
+      // In Quiz Me mode, bring the card and its Prev/Randomize/Next
+      // buttons into view right away — don't make someone arriving from
+      // "Quiz me on this wine" scroll past the page title to find them.
+      if (quizWineId) cardStage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
   } catch (err) {
     cardQuestion.textContent = 'Could not load the flashcard deck.';
     console.error(err);
